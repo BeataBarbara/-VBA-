@@ -1,0 +1,80 @@
+Sub filter()
+'A script filters data according to multicriterias
+'In workbook must be sheets named:
+'- "DS" - here will be pasted results
+'- "CS" - there, in column A paste the criterias for filter
+'- "rowData" - here paste data, which should be filtred
+'Before running a script please select set up an active cell in this column in sheet "rowData", where criterias can be found.
+
+Dim rngCri As Range
+Dim wb As Workbook
+Dim shCS As Worksheet
+Dim shDS As Worksheet
+Dim shRowData As Worksheet
+Dim rngCell As Range
+Dim iInt As Integer
+Dim sCriterium As String
+Dim lMaxRows As Long
+Dim lMaxColumns As Long
+Dim rngStart As Range
+Dim rngData As Range
+Dim lDataColumn As Long
+Dim boClear As Variant
+Dim lField As Long
+Application.ScreenUpdating = False
+
+
+Set wb = ThisWorkbook
+Set shCS = wb.Sheets("CS")
+Set shDS = wb.Sheets("DS")
+Set shRowData = wb.Sheets("rowData")
+Set rngStart = shRowData.Range("A1")
+Set rngData = rngStart.CurrentRegion
+Set rngCri = shCS.Range("rngCriteria")
+lDataColumn = rngData.Columns.Count
+
+lField = ActiveCell.Column
+boClear = MsgBox("Can I clear worksheet DS?", vbYesNo, "Sheet DS")
+If boClear = vbYes Then shDS.Cells.Clear
+
+shCS.Select
+iInt = 1
+For Each rngCell In rngCri
+sCriterium = rngCell.Value
+
+'shCS.Activate
+shRowData.Activate
+
+rngStart.AutoFilter _
+ Field:=lField, _
+ Criteria1:=sCriterium, _
+ VisibleDropDown:=False
+  lMaxRows = Range("A1").Cells(Rows.Count, "A").End(xlUp).Row
+
+  If iInt = 1 Then
+rngData.SpecialCells(xlCellTypeVisible).Copy
+
+Else
+rngData.Offset(1, 0).Range("a1").Select
+ActiveCell.Range(Cells(ActiveCell.Row, 1), Cells(lMaxRows, lDataColumn)).Copy
+
+End If
+shDS.Select
+  If iInt = 1 Then
+ shDS.Cells(1, 1).PasteSpecial Paste:=xlPasteValues
+ lMaxRows = shDS.UsedRange.Rows(shDS.UsedRange.Rows.Count).Row
+ Cells(lMaxRows, 1).Offset(1, 0).Range("A1").Select
+
+ Else
+    ActiveCell.PasteSpecial Paste:=xlPasteValues
+ lMaxRows = shDS.UsedRange.Rows(shDS.UsedRange.Rows.Count).Row
+ Cells(lMaxRows, 1).Offset(1, 0).Range("A1").Select
+End If
+iInt = iInt + 1
+Next rngCell
+
+shRowData.AutoFilterMode = False
+Application.CutCopyMode = False
+Application.ScreenUpdating = True
+
+End Sub
