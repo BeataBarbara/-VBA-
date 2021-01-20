@@ -1,0 +1,20 @@
+Function filePicker(capt As String) As Workbook
+'select a file from dilog window. Default folder is where file is saved
+  
+    Dim fd As FileDialog
+    
+    Set fd = Application.FileDialog(msoFileDialogFilePicker)
+    
+    With fd
+        .Title = capt
+        .InitialFileName = ThisWorkbook.Path & "\"
+        .AllowMultiSelect = False
+        If .Show <> -1 Then GoTo No_file
+        Set filePicker = Workbooks.Open(Dir(.SelectedItems(1)))
+    End With
+    
+    Exit Function
+    
+No_file:
+    MsgBox "No file chosen!", , "File open error!"
+End Function
