@@ -1,0 +1,24 @@
+Sub randomColors()
+'procedure colors cells with random colors
+Dim rngCells As Range
+Dim rngCell As Range
+Dim iRow As Integer
+Dim iCol As Integer
+Dim iColor As Integer
+
+Sheets("Sheet1").Cells.Clear
+iRow = InputBox("how many rows?", , 10)
+iCol = InputBox("how many columns?", , 3)
+
+Set rngCells = Range(Cells(1, 1), Cells(iRow, iCol))
+'rngCells.Select
+
+For Each rngCell In rngCells
+  iColor = Round(Rnd() * 55, 0) + 1
+  With rngCell
+    .Interior.ColorIndex = iColor
+    .Value = iColor
+  End With
+Next rngCell
+
+End Sub
