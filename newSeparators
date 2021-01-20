@@ -16,8 +16,6 @@ For iInt = 0 To iLen - 1
         dbNewNumb = dbNewNumb & Mid(sIntegerPart, iInt + 1, 1)
     End If
 Next iInt
-Debug.Print "Integer part is " & dbNewNumb
-Debug.Print "Decimal part is " & sDecimalPart
 
 btDecimalPart = Len(sDecimalPart)
 
