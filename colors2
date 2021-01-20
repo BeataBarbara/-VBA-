@@ -1,0 +1,29 @@
+Sub randomColors2()
+'collors cells with random colors. And also change font kolor. RGB color will be typed in cell.
+Dim rngCells As Range
+Dim rngCell As Range
+Dim btRow As Byte
+Dim btCol As Byte
+Dim btColor1 As Byte
+Dim btColor2 As Byte
+Dim btColor3 As Byte
+
+Activesheet.Cells.Clear
+btRow = InputBox("how many rows", , 10)
+btCol = InputBox("how many columns", , 3)
+
+Set rngCells = Range(Cells(1, 1), Cells(btRow, btCol))
+'rngCells.Select
+
+For Each rngCell In rngCells
+  btColor1 = Round(Rnd() * 255, 0)
+  btColor2 = Round(Rnd() * 255, 0)
+  btColor3 = Round(Rnd() * 255, 0)
+  With rngCell
+    .Interior.Color = RGB(btColor1, btColor2, btColor3)
+    .Value = btColor1 & ", " & btColor2 & ", " & btColor3
+    .Font.Color = RGB(255 - btColor1, 255 - btColor2, 255 - btColor3)
+  End With
+Next rngCell
+
+End Sub
