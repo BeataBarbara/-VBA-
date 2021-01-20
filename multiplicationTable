@@ -1,0 +1,32 @@
+Sub multiplicationTable()
+
+Dim arr() As Long
+
+Dim rngCells As Range
+Dim dblRow As Long
+Dim dblCol As Long
+Dim iStart1 As Long
+Dim iStart2 As Long
+
+ActiveSheet.Cells.Clear
+
+'determine the size of table using inputboxes
+'dblRow = InputBox("how many rows?", , 100)
+'dblCol = InputBox("how many columns?", , 100)
+
+'use these lines instead of to set end point of calculation table
+dblRow = ActiveCell.Row
+dblCol = ActiveCell.Column
+
+Set rngCells = ActiveWorkbook.ActiveSheet.Range(Cells(1, 1), Cells(dblRow, dblCol))
+  ReDim arr(dblRow, dblCol)
+For iStart1 = 0 To dblRow
+  For iStart2 = 0 To dblCol
+
+    arr(iStart1, iStart2) = (iStart1 + 1) * (iStart2 + 1)
+  Next iStart2
+Next iStart1
+
+rngCells = arr
+
+End Sub
