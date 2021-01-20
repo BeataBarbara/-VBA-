@@ -1,0 +1,11 @@
+Function concatenateWith(rngCells As Range, Optional sSign As String) As String
+' function joins every element in range with (or not) a sing (sSign)
+Dim rngCell As Range
+
+For Each rngCell In rngCells
+    concatenateWith = concatenateWith & rngCell.Value & sSign
+Next rngCell
+
+concatenateWith = Left(concatenateWith, Len(concatenateWith) - Len(sSign))
+  
+End Function
