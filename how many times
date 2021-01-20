@@ -1,0 +1,20 @@
+Function howManyTimes(sCriterium As String, sText As String) As Integer
+'a function checks how many times a string (sCriterium) appears in another (sText)
+Dim iLen As Integer
+Dim iInt As Integer
+Dim sNewText As String
+Dim asLetters() As String
+
+iLen = Len(sText)
+ReDim asLetters(0 To iLen - 1)
+
+For iInt = 0 To iLen - 1
+    asLetters(iInt) = Mid(sText, iLen - iInt, 1)
+    Next iInt
+
+For iInt = 0 To iLen - 1
+    If asLetters(iInt) = sCriterium Then howManyTimes = howManyTimes + 1
+On Error Resume Next
+Next iInt
+
+End Function
