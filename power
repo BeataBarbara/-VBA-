@@ -1,0 +1,5 @@
+Function Power(exponent As Byte, Optional base As Byte = 10)
+'a shorter form to calculate power
+Power = WorksheetFunction.Power(base, exponent)
+
+End Function
