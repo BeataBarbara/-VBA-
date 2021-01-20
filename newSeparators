@@ -1,0 +1,25 @@
+Public Function changeSeparator(sNumber As String, sThouSep As String, sDecSep As String) As Double
+'select a number and its current separators (sDecSep and sThouSep) and this function will convert the separators to system separators
+Dim iLen As Integer
+Dim iInt As Integer
+Dim dbNewNumb As Double
+Dim sDecimalPart As String
+Dim sIntegerPart As String
+Dim btDecimalPart As Byte
+
+sIntegerPart = betterSplit(sNumber, sDecSep, True)
+sDecimalPart = StrReverse(betterSplit(StrReverse(sNumber), sDecSep, True))
+iLen = Len(sIntegerPart)
+
+For iInt = 0 To iLen - 1
+    If Mid(sIntegerPart, iInt + 1, 1) <> sThouSep Then
+        dbNewNumb = dbNewNumb & Mid(sIntegerPart, iInt + 1, 1)
+    End If
+Next iInt
+Debug.Print "Integer part is " & dbNewNumb
+Debug.Print "Decimal part is " & sDecimalPart
+
+btDecimalPart = Len(sDecimalPart)
+
+changeSeparator = dbNewNumb + sDecimalPart / (WorksheetFunction.Power(10, btDecimalPart))
+End Function
