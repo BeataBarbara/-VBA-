@@ -1,0 +1,15 @@
+Function betterSplit(sText As String, sSep As String, boOpt As Boolean) As String
+' you have a text (sText). You want to split it from or to some element (sSep)
+' if you want to part of text to this element (left part) type 1
+' if you want to part of text from this element (rigth part) type 0
+
+Dim btPosition As Byte
+
+btPosition = WorksheetFunction.Find(sSep, sText)
+If boOpt = True Then
+    betterSplit = Left(sText, btPosition - 1)
+    Else
+    betterSplit = Right(sText, Len(sText) - btPosition - Len(sSep) + 1)
+End If
+
+End Function
