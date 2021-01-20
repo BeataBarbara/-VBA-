@@ -1,0 +1,19 @@
+Function reverse(sText As String) As String
+' a result of function is reversed argument
+Dim iLen As Integer
+Dim iInt As Integer
+Dim sNewText As String
+Dim asLetters() As String
+
+iLen = Len(sText)
+ReDim asLetters(0 To iLen - 1)
+
+For iInt = 0 To iLen - 1
+    asLetters(iInt) = Mid(sText, iLen - iInt, 1)
+    Next iInt
+
+For iInt = iLen - 1 To 0 Step -1
+    sNewText = sNewText & asLetters(iLen - 1 - iInt)
+    Next iInt
+    reverse = sNewText
+End Function
