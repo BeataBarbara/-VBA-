@@ -1,0 +1,14 @@
+Sub splitSign()
+'splits every sign in string and type to sepatares cells
+
+Dim sInput As String
+Dim sSign As String
+Dim i As Byte
+
+sInput = "1234567890"
+
+For i = 1 To Len(sInput)
+    Cells(1, i) = Mid(sInput, i, 1)
+Next i
+    
+End Sub
